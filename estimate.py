@@ -1,4 +1,6 @@
 import math
+import numpy as np
+import random
 import unittest
 
 class TestWallis(unittest.TestCase):
@@ -30,20 +32,18 @@ def w_n(n):
     pi_value = 1    
     for i in range(1,n):
         pi_value *= ((4*pow(i, 2))/((4*pow(i, 2))-1))
-    print(pi_value*2)
-w_n(1000)
+    return(value*2)
 
-import numpy as np
-N=100000
-n=0
-xpoints=np.random.random(N)
-ypoints=np.random.random(N)
-for i in range(N):
-    if(xpoints[i]**2+ypoints[i]**2)<=1:
-        n=n+1
-pi=4.0*n/N
-print('pi=',pi)
+def monte_carlo(N):
+    n=0
+    xpoints=np.random.random(N)
+    ypoints=np.random.random(N)
+    for i in range(N):
+        if(xpoints[i]**2+ypoints[i]**2)<=1:
+            n=n+1
+    pi=4.0*(n/N)
+    return(pi)
         
     
-if __name__ == "__main__":
+if _name_ == "_main_":
     unittest.main()
