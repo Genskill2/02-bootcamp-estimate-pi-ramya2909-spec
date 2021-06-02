@@ -26,6 +26,23 @@ class TestMC(unittest.TestCase):
         for i in range(500, 600):
             pi = monte_carlo(i)
             self.assertTrue(abs(pi - math.pi) < 0.4, msg=f"Estimate with even {i} iterations is {pi} which is not accurate enough.\n")
+def w_n(n):
+    pi_value = 1    
+    for i in range(1,n):
+        pi_value *= ((4*pow(i, 2))/((4*pow(i, 2))-1))
+    print(pi_value*2)
+w_n(1000)
+
+import numpy as np
+N=100000
+n=0
+xpoints=np.random.random(N)
+ypoints=np.random.random(N)
+for i in range(N):
+    if(xpoints[i]**2+ypoints[i]**2)<=1:
+        n=n+1
+pi=4.0*n/N
+print('pi=',pi)
         
     
 if __name__ == "__main__":
