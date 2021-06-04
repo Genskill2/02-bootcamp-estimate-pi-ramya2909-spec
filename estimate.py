@@ -1,5 +1,4 @@
 import math
-import numpy as np
 import random
 import unittest
 
@@ -28,22 +27,33 @@ class TestMC(unittest.TestCase):
         for i in range(500, 600):
             pi = monte_carlo(i)
             self.assertTrue(abs(pi - math.pi) < 0.4, msg=f"Estimate with even {i} iterations is {pi} which is not accurate enough.\n")
-def w_n(n):
-    pi_value = 1    
-    for i in range(1,n):
-        pi_value *= ((4*pow(i, 2))/((4*pow(i, 2))-1))
-    return(value*2)
-
-def monte_carlo(N):
-    n=0
-    xpoints=np.random.random(N)
-    ypoints=np.random.random(N)
-    for i in range(N):
-        if(xpoints[i]**2+ypoints[i]**2)<=1:
-            n=n+1
-    pi=4.0*(n/N)
-    return(pi)
         
-    
-if _name_ == "_main_":
+def wallis(n):
+    #assign 1 to a golabal variable pi_walli
+    pi_walli = 1
+
+    #keep multiplying the terms in the wallis formula for the given range n
+    for i in range(1,n):
+        pi_walli *= ((4*pow(i, 2))/((4*pow(i, 2))-1))
+
+    #now multiply the pi_walli with 2 and return the value
+    return(pi_walli*2)
+
+def monte_carlo(darts):
+    # let the initial no. of dart inside circle be 0
+    count_in_circle = 0
+
+    for i in range(0, darts):
+
+        # take the random location of dart
+        x = random.random()
+        y = random.random()
+        distance = math.sqrt((x ** 2) + (y ** 2))
+
+        # if the dart lies inside the circle
+        if distance < 1.0:
+            count_in_circle += 1
+    return ((count_in_circle / darts) * 4)
+
+if __name__ == "__main__":
     unittest.main()
